@@ -6,16 +6,20 @@ USERNAME=${USERNAME:-venkat_kesav}
 # Activate the virtual environment
 source /home/${USERNAME}/.venv/bin/activate
 
-# 22GiB
-# You can refer to `https://github.com/QwenLM/Qwen2.5-VL` for the meaning of the `MAX_PIXELS` parameter.
-# 1003520 = 1280 * 28 * 28
-CUDA_VISIBLE_DEVICES=0 \
-MODELSCOPE_CACHE="/workspace/models" \
-MAX_PIXELS=1003520 \
+nproc_per_node=2
+
+# Environmental Variables
+export CUDA_VISIBLE_DEVICES=0,1
+export MODELSCOPE_CACHE="/workspace/models" 
+export WANDB_API_KEY="2f5d0df5148bfa9175469270ad15c176dc23dcfd"
+export NPROC_PER_NODE=$nproc_per_node 
+
+# --model /workspace/models/Molmo-7B-D-0924 \
+
 swift sft \
-    --model /workspace/models/Molmo-7B-D-0924 \
-    --dataset 'modelscope/coco_2014_caption:validation#20000' \
+    --model /workspace/models/Qwen2.5-VL-7B-Instruct \
     --train_type lora \
+    --dataset swift/Mantis-Instruct:docvqa#500 \
     --torch_dtype bfloat16 \
     --num_train_epochs 1 \
     --per_device_train_batch_size 1 \
