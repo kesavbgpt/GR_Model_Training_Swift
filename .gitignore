@@ -1,3 +1,13 @@
-/models/
-
-/output/
+*/models/*
+*log*
+*/output/*
+final_outputs
+*.png
+*.jpg
+# models
+*.lock
+*.arrow
+models
+output_*
+wandb
+*.tar

@@ -67,7 +67,7 @@ RUN python3 -m venv .venv && \
     pip install --upgrade pip 
 
 # 5) Clone the ms-swift repo and install dependencies
-RUN git clone https://github.com/modelscope/ms-swift.git && \
+RUN https://github.com/SaiMadhusudan/ms-swift-evaluation.git  && \
     cd ms-swift && \
     pip install -e .
 
